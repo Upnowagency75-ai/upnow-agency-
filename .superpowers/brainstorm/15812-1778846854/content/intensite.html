@@ -1,0 +1,54 @@
+<h2>Quelle intensité pour les animations ?</h2>
+<p class="subtitle">Les deux sont cinématiques — la différence est dans l'amplitude et la durée</p>
+
+<div class="split">
+
+  <div class="mockup">
+    <div class="mockup-header">A — Subtil (style Apple)</div>
+    <div class="mockup-body" style="background:#000;padding:28px;display:flex;flex-direction:column;gap:14px;min-height:260px;">
+      <div style="font-size:11px;color:#2997ff;letter-spacing:0.1em;text-transform:uppercase;">Contactez-nous</div>
+      <div style="font-size:22px;font-weight:700;color:#f5f5f7;line-height:1.1;">Parlons de votre<br><span style="color:#2997ff;">projet.</span></div>
+      <div style="font-size:12px;color:#6e6e73;">Décrivez-nous ce que vous voulez...</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+        <div style="height:38px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;"></div>
+        <div style="height:38px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;"></div>
+      </div>
+      <div style="height:36px;width:55%;background:linear-gradient(90deg,#2997ff,#0071e3);border-radius:980px;margin-top:4px;"></div>
+      <div style="font-size:10px;color:#3d3d3f;margin-top:4px;">↑ Glissement doux 20px · opacité 0→1 · durée 0.6s · délai 0.1s entre éléments</div>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header">B — Dramatique (wow effect)</div>
+    <div class="mockup-body" style="background:#000;padding:28px;display:flex;flex-direction:column;gap:14px;min-height:260px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(41,151,255,0.25),transparent 70%);border-radius:50%;"></div>
+      <div style="font-size:11px;color:#2997ff;letter-spacing:0.12em;text-transform:uppercase;position:relative;">Contactez-nous</div>
+      <div style="font-size:24px;font-weight:700;color:#f5f5f7;line-height:1.1;position:relative;">Parlons de votre<br><span style="color:#2997ff;text-shadow:0 0 30px rgba(41,151,255,0.4);">projet.</span></div>
+      <div style="font-size:12px;color:#6e6e73;position:relative;">Décrivez-nous ce que vous voulez...</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;position:relative;">
+        <div style="height:38px;background:rgba(41,151,255,0.05);border:1px solid rgba(41,151,255,0.25);border-radius:10px;box-shadow:0 0 12px rgba(41,151,255,0.08);"></div>
+        <div style="height:38px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;"></div>
+      </div>
+      <div style="height:36px;width:55%;background:linear-gradient(90deg,#2997ff,#0071e3);border-radius:980px;margin-top:4px;box-shadow:0 0 24px rgba(41,151,255,0.4);"></div>
+      <div style="font-size:10px;color:#3d3d3f;margin-top:4px;">↑ Glissement 60px · blur 0→1 · orbe bleue · glow sur titre · durée 1s</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="options" style="margin-top:24px;">
+  <div class="option" data-choice="subtil" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Subtil — style Apple</h3>
+      <p>Élégant, rapide, professionnel. Les éléments glissent légèrement vers le haut et apparaissent en douceur. On sent la qualité sans l'esbroufe.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="dramatique" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Dramatique — wow effect</h3>
+      <p>Plus d'amplitude, orbe bleue en fond, lueur sur le titre et le bouton. Ça marque les esprits dès l'arrivée sur la page.</p>
+    </div>
+  </div>
+</div>

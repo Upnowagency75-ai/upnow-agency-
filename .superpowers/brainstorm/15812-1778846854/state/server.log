@@ -1,0 +1,11 @@
+{"type":"server-started","port":50558,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:50558","screen_dir":"/Users/aminebensaad/Desktop/mon-site/.superpowers/brainstorm/15812-1778846854/content","state_dir":"/Users/aminebensaad/Desktop/mon-site/.superpowers/brainstorm/15812-1778846854/state"}
+{"type":"screen-added","file":"/Users/aminebensaad/Desktop/mon-site/.superpowers/brainstorm/15812-1778846854/content/ambiance.html"}
+{"source":"user-event","type":"click","text":"✨ Cinématique\n      Entrée en scène au chargement — titre, formulaire et réseaux apparaissent en cascade avec un effet de glissement. Style Apple/premium. Rapide et élégant.","choice":"cinema","id":null,"timestamp":1778846927816}
+{"source":"user-event","type":"click","text":"✨ Cinématique\n      Entrée en scène au chargement — titre, formulaire et réseaux apparaissent en cascade avec un effet de glissement. Style Apple/premium. Rapide et élégant.","choice":"cinema","id":null,"timestamp":1778846929255}
+{"source":"user-event","type":"click","text":"✨ Cinématique\n      Entrée en scène au chargement — titre, formulaire et réseaux apparaissent en cascade avec un effet de glissement. Style Apple/premium. Rapide et élégant.","choice":"cinema","id":null,"timestamp":1778846929444}
+{"source":"user-event","type":"click","text":"🌌 Particules & Néon\n      Fond animé avec des particules bleues flottantes et des cercles lumineux. Ambiance tech/digital. Le formulaire flotte sur cet univers visuel.","choice":"particles","id":null,"timestamp":1778846951287}
+{"source":"user-event","type":"click","text":"⚡ Hyper-Interactif\n      Chaque interaction réagit : les champs s'illuminent au focus, les cartes de services ont un effet magnétique au hover, le bouton pulse, confirmation animée au succès.","choice":"interactive","id":null,"timestamp":1778846962522}
+{"type":"screen-added","file":"/Users/aminebensaad/Desktop/mon-site/.superpowers/brainstorm/15812-1778846854/content/intensite.html"}
+{"type":"screen-added","file":"/Users/aminebensaad/Desktop/mon-site/.superpowers/brainstorm/15812-1778846854/content/succes.html"}
+{"type":"screen-added","file":"/Users/aminebensaad/Desktop/mon-site/.superpowers/brainstorm/15812-1778846854/content/waiting.html"}
+{"type":"server-stopped","reason":"idle timeout"}
