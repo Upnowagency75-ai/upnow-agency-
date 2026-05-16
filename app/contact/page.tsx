@@ -97,7 +97,7 @@ function detectSource(): string {
 
 export default function ContactPage() {
   const [selected, setSelected] = useState<string[]>([]);
-  const [form, setForm] = useState({ nom: "", email: "", tel: "", ville: "", message: "" });
+  const [form, setForm] = useState({ nom: "", email: "", tel: "", ville: "", typeCommerce: "", nomCommerce: "", message: "" });
   const [reserverAppel, setReserverAppel] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedHeure, setSelectedHeure] = useState<string | null>(null);
@@ -190,6 +190,8 @@ export default function ContactPage() {
       `*Email :* ${form.email}\n` +
       `*Téléphone :* ${form.tel}\n` +
       `*Ville :* ${form.ville || "Non précisée"}\n` +
+      `*Type de commerce :* ${form.typeCommerce || "Non précisé"}\n` +
+      `*Nom du commerce :* ${form.nomCommerce || "Non précisé"}\n` +
       (reserverAppel ? `*📞 Appel réservé le :* ${selectedDate} à ${selectedHeure}\n` : "") +
       `*Services souhaités :* ${servicesLabels || "Non précisé"}\n\n` +
       `*Message :*\n${form.message}`
@@ -204,7 +206,7 @@ export default function ContactPage() {
     handleSocialClick(waConfig, `https://wa.me/33744810427?text=${msg}`);
 
     // Reset
-    setForm({ nom: "", email: "", tel: "", ville: "", message: "" });
+    setForm({ nom: "", email: "", tel: "", ville: "", typeCommerce: "", nomCommerce: "", message: "" });
     setReserverAppel(false);
     setSelectedDate(null);
     setSelectedHeure(null);
@@ -383,6 +385,8 @@ export default function ContactPage() {
                 { key: "email", label: "Email", type: "email", placeholder: "jean@exemple.com" },
                 { key: "tel", label: "Téléphone", type: "tel", placeholder: "+33 6 00 00 00 00" },
                 { key: "ville", label: "Ville", type: "text", placeholder: "Paris, Lyon, Marseille..." },
+                { key: "typeCommerce", label: "Type de commerce", type: "text", placeholder: "Restaurant, Coiffeur, Boutique..." },
+                { key: "nomCommerce", label: "Nom du commerce", type: "text", placeholder: "Le Petit Bistrot, Salon Marie..." },
               ].map((f) => (
                 <div key={f.key}>
                   <label style={{ display: "block", fontSize: 12, fontWeight: 600, color: "#a1a1a6", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 8 }}>

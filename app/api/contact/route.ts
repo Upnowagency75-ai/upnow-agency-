@@ -9,12 +9,12 @@ const redis = new Redis({
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { nom, email, tel, ville, services, message, appel, dateAppel, heureAppel, source } = body;
+  const { nom, email, tel, ville, typeCommerce, nomCommerce, services, message, appel, dateAppel, heureAppel, source } = body;
 
   const contact = {
     id: Date.now().toString(),
     date: new Date().toISOString(),
-    nom, email, tel, ville, services, message,
+    nom, email, tel, ville, typeCommerce, nomCommerce, services, message,
     appel: appel || false,
     dateAppel: dateAppel || null,
     heureAppel: heureAppel || null,
@@ -48,6 +48,8 @@ export async function POST(req: NextRequest) {
               <tr><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#a1a1a6;font-size:13px">Email</td><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;font-size:13px"><a href="mailto:${email}" style="color:#2997ff">${email}</a></td></tr>
               <tr><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#a1a1a6;font-size:13px">Téléphone</td><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#f5f5f7;font-size:13px;font-weight:600">${tel || "—"}</td></tr>
               <tr><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#a1a1a6;font-size:13px">Ville</td><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#f5f5f7;font-size:13px;font-weight:600">${ville || "—"}</td></tr>
+              <tr><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#a1a1a6;font-size:13px">Type de commerce</td><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#f5f5f7;font-size:13px;font-weight:600">${typeCommerce || "—"}</td></tr>
+              <tr><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#a1a1a6;font-size:13px">Nom du commerce</td><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#f5f5f7;font-size:13px;font-weight:600">${nomCommerce || "—"}</td></tr>
               <tr><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#a1a1a6;font-size:13px">Source</td><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#f5f5f7;font-size:13px;font-weight:600">${source || "Direct"}</td></tr>
               <tr><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#a1a1a6;font-size:13px">Services</td><td style="padding:10px 0;border-bottom:1px solid #1d1d1f;color:#f5f5f7;font-size:13px">${services || "Non précisé"}</td></tr>
               ${appelBlock}
