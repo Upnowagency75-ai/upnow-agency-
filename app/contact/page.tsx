@@ -102,6 +102,7 @@ export default function ContactPage() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedHeure, setSelectedHeure] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [appelAnimating, setAppelAnimating] = useState(false);
 
   const heures = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00", "17:00"];
 
@@ -254,6 +255,26 @@ export default function ContactPage() {
         @keyframes successGlow {
           0%, 100% { box-shadow: 0 0 20px rgba(37,211,102,0.5); }
           50% { box-shadow: 0 0 40px rgba(37,211,102,0.9), 0 0 60px rgba(37,211,102,0.4); }
+        }
+        @keyframes confettiFly {
+          0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+          80% { opacity: 1; }
+          100% { transform: translateY(-140px) rotate(720deg) scale(0.3); opacity: 0; }
+        }
+        @keyframes confettiSide {
+          0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+          100% { transform: translate(var(--tx), -110px) rotate(540deg) scale(0.2); opacity: 0; }
+        }
+        @keyframes appelBounce {
+          0% { transform: scale(1); }
+          30% { transform: scale(1.04); }
+          60% { transform: scale(0.97); }
+          100% { transform: scale(1); }
+        }
+        @keyframes starBurst {
+          0% { transform: scale(0) rotate(0deg); opacity: 1; }
+          60% { transform: scale(1.4) rotate(180deg); opacity: 1; }
+          100% { transform: scale(0) rotate(360deg); opacity: 0; }
         }
 
         /* Mobile */
@@ -438,10 +459,52 @@ export default function ContactPage() {
               ))}
 
               {/* Réserver un appel */}
-              <div>
+              <div style={{ position: "relative" }}>
+                {/* Confettis */}
+                {appelAnimating && (() => {
+                  const colors = ["#2997ff", "#25D366", "#FFD60A", "#FF375F", "#BF5AF2", "#FF9F0A", "#30D158"];
+                  const shapes = ["●", "■", "▲", "★", "◆"];
+                  return Array.from({ length: 22 }).map((_, i) => {
+                    const color = colors[i % colors.length];
+                    const shape = shapes[i % shapes.length];
+                    const tx = (Math.random() * 160 - 80).toFixed(0);
+                    const delay = (Math.random() * 0.3).toFixed(2);
+                    const size = (10 + Math.random() * 10).toFixed(0);
+                    const dur = (0.9 + Math.random() * 0.5).toFixed(2);
+                    const left = (10 + Math.random() * 80).toFixed(0);
+                    return (
+                      <span
+                        key={i}
+                        style={{
+                          position: "absolute",
+                          left: `${left}%`,
+                          top: "50%",
+                          fontSize: `${size}px`,
+                          color,
+                          pointerEvents: "none",
+                          zIndex: 10,
+                          // @ts-expect-error custom CSS var
+                          "--tx": `${tx}px`,
+                          animation: `confettiSide ${dur}s ease-out ${delay}s both`,
+                          lineHeight: 1,
+                        } as React.CSSProperties}
+                      >
+                        {shape}
+                      </span>
+                    );
+                  });
+                })()}
+
                 <button
                   type="button"
-                  onClick={() => setReserverAppel((v) => !v)}
+                  onClick={() => {
+                    const next = !reserverAppel;
+                    setReserverAppel(next);
+                    if (next) {
+                      setAppelAnimating(true);
+                      setTimeout(() => setAppelAnimating(false), 1600);
+                    }
+                  }}
                   style={{
                     width: "100%",
                     display: "flex", alignItems: "center", gap: 14,
@@ -450,7 +513,9 @@ export default function ContactPage() {
                     borderRadius: 10, padding: "14px 16px",
                     cursor: "pointer", textAlign: "left",
                     transition: "background 0.25s, border-color 0.25s, box-shadow 0.25s",
-                    boxShadow: reserverAppel ? "0 0 0 3px rgba(41,151,255,0.15)" : "none",
+                    boxShadow: reserverAppel ? "0 0 0 3px rgba(41,151,255,0.15), 0 0 20px rgba(41,151,255,0.2)" : "none",
+                    animation: appelAnimating ? "appelBounce 0.45s ease" : "none",
+                    position: "relative", overflow: "visible",
                   }}
                 >
                   <div style={{
@@ -459,12 +524,13 @@ export default function ContactPage() {
                     border: `2px solid ${reserverAppel ? "#2997ff" : "rgba(255,255,255,0.25)"}`,
                     display: "flex", alignItems: "center", justifyContent: "center",
                     transition: "background 0.2s, border-color 0.2s",
+                    animation: appelAnimating ? "successPulse 0.45s cubic-bezier(0.34,1.56,0.64,1)" : "none",
                   }}>
                     {reserverAppel && <span style={{ color: "#fff", fontSize: 13, lineHeight: 1 }}>✓</span>}
                   </div>
                   <div>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: reserverAppel ? "#f5f5f7" : "#a1a1a6" }}>
-                      Réserver un appel téléphonique
+                    <div style={{ fontSize: 14, fontWeight: 600, color: reserverAppel ? "#2997ff" : "#a1a1a6", transition: "color 0.2s" }}>
+                      {reserverAppel && appelAnimating ? "🎉 Appel réservé !" : "Réserver un appel téléphonique"}
                     </div>
                     <div style={{ fontSize: 12, color: "#6e6e73", marginTop: 2 }}>
                       Un conseiller vous rappelle sous 24h
