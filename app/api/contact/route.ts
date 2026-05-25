@@ -42,6 +42,22 @@ export async function POST(req: NextRequest) {
 
   await redis.lpush("contacts", JSON.stringify(contact));
 
+  // Send brochure to client automatically
+  try {
+    await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        service_id: "service_9viscfm",
+        template_id: "template_zmsghbh",
+        user_id: "4SQHGkxSIenZHKY8A",
+        template_params: { prenom: nom, email_client: email },
+      }),
+    });
+  } catch (err) {
+    console.error("EmailJS brochure error:", err);
+  }
+
   if (process.env.GMAIL_USER && process.env.GMAIL_PASS) {
     try {
       const transporter = nodemailer.createTransport({
