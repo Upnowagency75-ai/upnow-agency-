@@ -483,7 +483,6 @@ export default function ContactPage() {
                           color,
                           pointerEvents: "none",
                           zIndex: 10,
-                          // @ts-expect-error custom CSS var
                           "--tx": `${tx}px`,
                           animation: `confettiSide ${dur}s ease-out ${delay}s both`,
                           lineHeight: 1,
