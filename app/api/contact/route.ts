@@ -42,22 +42,6 @@ export async function POST(req: NextRequest) {
 
   await redis.lpush("contacts", JSON.stringify(contact));
 
-  // Send brochure to client automatically
-  try {
-    await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        service_id: "service_9viscfm",
-        template_id: "template_zmsghbh",
-        user_id: "4SQHGkxSIenZHKY8A",
-        template_params: { prenom: nom, email_client: email },
-      }),
-    });
-  } catch (err) {
-    console.error("EmailJS brochure error:", err);
-  }
-
   if (process.env.GMAIL_USER && process.env.GMAIL_PASS) {
     try {
       const transporter = nodemailer.createTransport({
@@ -115,6 +99,42 @@ export async function POST(req: NextRequest) {
         subject: `${appel ? "📞 Appel réservé" : "📩 Nouveau contact"} — ${nom}${appel ? ` · ${dateAppel} à ${heureAppel}` : ""}`,
         html,
         replyTo: email,
+      });
+
+      // Envoi brochure au client
+      await transporter.sendMail({
+        from: `"UpNow Agency" <${process.env.GMAIL_USER}>`,
+        to: email,
+        subject: `Votre brochure UpNow Agency 📩`,
+        html: `<!DOCTYPE html><html><head><meta charset="utf-8"></head>
+        <body style="margin:0;padding:0;background:#f1f5f9;font-family:Arial,sans-serif;">
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#f1f5f9;padding:40px 0;">
+            <tr><td align="center">
+              <table width="600" cellpadding="0" cellspacing="0" style="background:#0f172a;border-radius:20px;overflow:hidden;max-width:600px;">
+                <tr><td style="padding:40px 48px 32px;text-align:center;background:linear-gradient(135deg,#0f172a,#1e3a5f);">
+                  <div style="font-size:26px;font-weight:900;letter-spacing:3px;color:#fff;">UP<span style="color:#3b82f6;">NOW</span></div>
+                  <div style="font-size:12px;color:#64748b;letter-spacing:2px;text-transform:uppercase;margin-top:4px;">Agency</div>
+                </td></tr>
+                <tr><td style="padding:40px 48px;">
+                  <p style="margin:0 0 20px;font-size:16px;color:#94a3b8;">Bonjour <strong style="color:#fff;">${nom}</strong>,</p>
+                  <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#94a3b8;">Merci pour votre contact ! Voici votre brochure compl&egrave;te UpNow Agency — services, tarifs et exemples de r&eacute;alisations.</p>
+                  <table cellpadding="0" cellspacing="0" style="margin:0 auto 32px;">
+                    <tr><td style="background:#3b82f6;border-radius:12px;padding:16px 36px;text-align:center;">
+                      <a href="https://upnow-agency.vercel.app/brochure.html" target="_blank" style="color:#fff;font-size:16px;font-weight:700;text-decoration:none;">Voir ma brochure &rarr;</a>
+                    </td></tr>
+                  </table>
+                  <p style="margin:0;font-size:14px;color:#64748b;">
+                    📞 <a href="tel:+33774810427" style="color:#3b82f6;">+33 7 74 81 04 27</a><br>
+                    ✉️ <a href="mailto:upnow.agency75@gmail.com" style="color:#3b82f6;">upnow.agency75@gmail.com</a>
+                  </p>
+                </td></tr>
+                <tr><td style="padding:24px 48px;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
+                  <p style="margin:0;font-size:11px;color:#334155;">© 2025 UpNow Agency — Paris, France</p>
+                </td></tr>
+              </table>
+            </td></tr>
+          </table>
+        </body></html>`,
       });
     } catch (err) {
       console.error("Email error:", err);

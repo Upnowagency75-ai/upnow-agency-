@@ -187,17 +187,6 @@ export default function ContactPage() {
       }),
     });
 
-    // Envoi brochure automatique au client
-    fetch("https://api.emailjs.com/api/v1.0/email/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        service_id: "service_9viscfm",
-        template_id: "template_zmsghbh",
-        user_id: "4SQHGkxSIenZHKY8A",
-        template_params: { prenom: form.nom, email_client: form.email },
-      }),
-    });
 
     // Envoi WhatsApp
     const msg = encodeURIComponent(
